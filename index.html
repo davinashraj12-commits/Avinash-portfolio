@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avinash D | Senior Network Engineer</title>
+  <style>
+    :root{
+      --brand:#1d4ed8;
+      --brand-2:#2563eb;
+      --ink:#0b1220;
+      --muted:#5b677a;
+      --line:#e6e9ef;
+      --card:#ffffff;
+      --bg:#f6f7fb;
+      --soft:#f3f4f6;
+      --shadow: 0 10px 25px rgba(15, 23, 42, .08);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      /* Cool sky blue + mint green background */
+      background: linear-gradient(135deg,
+        #e6f4ff 0%,   /* sky blue */
+        #eefcff 30%,  /* very light blue */
+        #e8fbf5 65%,  /* mint green */
+        #f2fffb 100%  /* soft mint */
+      );
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+
+
+
+    }
+
+    .wrap{width:min(1150px, 100%); margin:0 auto;}
+    .section{
+      padding:60px 18px; /* ~half inch vertical gap */
+      scroll-margin-top:80px;
+      position:relative;
+      overflow:hidden;
+}
+
+/* diagonal colorful background behind content */
+.section::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg,
+        #e6f4ff 0%,
+        #eefcff 30%,
+        #e8fbf5 65%,
+        #f2fffb 100%
+      );
+      z-index:0;
+}
+
+.section.alt::before{
+      background:linear-gradient(135deg,
+        #e8fbf5 0%,
+        #eefcff 35%,
+        #e6f4ff 70%,
+        #f2fffb 100%
+      );
+}
+
+.section > .wrap{
+      position:relative;
+      z-index:1;
+}padding:120px 18px; scroll-margin-top:120px; border-top:1px solid var(--line); background:#fff; position:relative; overflow:hidden;}
+    .section.alt{background:var(--soft)}
+
+    .title{text-align:center; font-size:clamp(34px, 3.2vw, 54px); margin:0 0 24px; font-weight:900;}
+    .subtitle{text-align:center; max-width:980px; margin:0 auto; font-size:18px; line-height:1.75; color:#222;}
+    .note{text-align:center; color:var(--muted); font-size:13px; margin-top:12px;}
+
+    .reveal{opacity:0; transform:translateY(18px);} 
+    .reveal.in{opacity:1; transform:translateY(0); transition:opacity .65s ease, transform .65s ease;}
+
+    /* HERO */
+    .hero{
+      padding-bottom:160px;
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:70px 18px 120px;
+      text-align:center;
+      color:#fff;
+      background:
+        linear-gradient(0deg, rgba(7, 16, 35, .78), rgba(7, 16, 35, .58)),
+        url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=2400&q=60');
+      background-size:cover;
+      background-position:center;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:-40px;
+      background:
+        radial-gradient(closest-side, rgba(37,99,235,.22), transparent 65%) 10% 25%/520px 520px no-repeat,
+        radial-gradient(closest-side, rgba(16,185,129,.14), transparent 65%) 85% 20%/560px 560px no-repeat,
+        radial-gradient(closest-side, rgba(37,99,235,.14), transparent 65%) 50% 95%/620px 620px no-repeat;
+      pointer-events:none;
+      mix-blend-mode:screen;
+      opacity:.95;
+    }
+    .hero h1{margin:0 0 10px; font-size:clamp(34px, 4.2vw, 66px); font-weight:850; text-shadow:0 10px 30px rgba(0,0,0,.25); position:relative; z-index:1;}
+    .hero h2{margin:0 0 14px; font-size:clamp(18px, 2.1vw, 34px); font-weight:750; opacity:.95; position:relative; z-index:1;}
+    .hero p{margin:0 auto 26px; max-width:980px; font-size:clamp(14px, 1.15vw, 18px); line-height:1.7; opacity:.95; position:relative; z-index:1;}
+
+    .icon-row{display:flex; gap:18px; justify-content:center; align-items:center; margin:22px 0 30px; flex-wrap:wrap; position:relative; z-index:1;}
+    .icon-btn{width:54px; height:54px; border-radius:12px; display:grid; place-items:center; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); backdrop-filter:blur(6px); text-decoration:none; transition:transform .15s ease, background .15s ease;}
+    .icon-btn:hover{transform:translateY(-2px); background:rgba(255,255,255,.18);} 
+    .icon-btn svg{width:26px; height:26px; fill:#fff; opacity:.95}
+
+    .hero-nav{
+      position:absolute;
+      left:50%;
+      bottom:-96px; /* moved down ~1 inch */
+      transform:translateX(-50%);
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      justify-content:center;
+      padding:0 10px;
+      width:min(980px, calc(100% - 30px));
+      z-index:2;
+}
+    .pill{background:rgba(3, 7, 18, .55); border:1px solid rgba(255,255,255,.18); color:#fff; text-decoration:none; padding:10px 18px; border-radius:999px; font-weight:700; font-size:15px; transition:transform .15s ease, background .15s ease; box-shadow:0 10px 28px rgba(0,0,0,.12); white-space:nowrap;}
+    .pill:hover{transform:translateY(-1px); background:rgba(3,7,18,.7)}
+
+    /* ABOUT */
+    .about-grid{margin-top:36px; display:grid; grid-template-columns:1.1fr .9fr; gap:26px; align-items:stretch;}
+    .about-card{background:linear-gradient(135deg, rgba(29,78,216,.08), rgba(255,255,255,1) 55%); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); padding:22px; position:relative; overflow:hidden;}
+    .about-card::after{content:""; position:absolute; inset:-60px; background:radial-gradient(closest-side, rgba(37,99,235,.18), transparent 65%) 12% 20%/420px 420px no-repeat, radial-gradient(closest-side, rgba(16,185,129,.12), transparent 65%) 85% 35%/420px 420px no-repeat; pointer-events:none; opacity:.9;}
+    .about-head{display:flex; align-items:flex-start; gap:16px; position:relative; z-index:1;}
+    .avatar{width:64px; height:64px; border-radius:16px; border:1px solid var(--line); background:linear-gradient(135deg, rgba(29,78,216,.18), rgba(2,6,23,.04)); display:grid; place-items:center; font-weight:950; color:var(--brand); box-shadow:0 12px 26px rgba(15,23,42,.08);}
+    .about-head h4{margin:0; font-size:20px;}
+    .about-head p{margin:6px 0 0; color:var(--muted); line-height:1.65;}
+    .highlights{position:relative; z-index:1; margin-top:16px; display:flex; flex-wrap:wrap; gap:10px;}
+    .chip{border:1px solid #dbe3f4; background:#fff; border-radius:999px; padding:8px 12px; font-size:13px; font-weight:750; color:#0f172a;}
+    .chip strong{color:var(--brand)}
+    .about-stats{
+      background:linear-gradient(135deg,
+        rgba(29,78,216,.06),
+        rgba(16,185,129,.06)
+      );
+      border:1px solid var(--line);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      position:relative;
+      overflow:hidden;
+}
+.about-stats::after{
+      content:"";
+      position:absolute;
+      inset:-40px;
+      background:
+        radial-gradient(closest-side, rgba(37,99,235,.18), transparent 65%) 15% 20%/380px 380px no-repeat,
+        radial-gradient(closest-side, rgba(16,185,129,.16), transparent 65%) 85% 80%/380px 380px no-repeat;
+      pointer-events:none;
+      opacity:.9;
+}
+    .stat-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px;}
+    .stat{border:1px solid var(--line); border-radius:14px; padding:14px; background:#fbfcff;}
+    .stat b{display:block; font-size:18px;}
+    .stat span{color:var(--muted); font-weight:650; font-size:13px;}
+    @media (max-width:980px){.about-grid{grid-template-columns:1fr;}}
+
+    /* TECH */
+    .tools{margin-top:46px; position:relative; background:radial-gradient(circle at 20% 20%, rgba(29,78,216,.08), transparent 45%), radial-gradient(circle at 80% 30%, rgba(16,185,129,.08), transparent 45%); padding:40px 20px; border-radius:28px; display:grid; grid-template-columns:repeat(6, 1fr); gap:28px 22px; align-items:start;}
+    .tool{display:flex; flex-direction:column; align-items:center; gap:10px; padding:10px; position:relative;}
+    .tool .badge{width:66px; height:66px; border-radius:18px; display:grid; place-items:center; background:#fff; border:1px solid var(--line); box-shadow:0 10px 20px rgba(15,23,42,.06); font-weight:950; font-size:16px; color:var(--brand); position:relative; overflow:hidden;}
+    .tool .badge::before, .tool .badge::after{content:""; position:absolute; inset:8px; border-radius:14px; border:2px solid rgba(37,99,235,.25); opacity:0; transform:scale(.85); animation:pulse 2.2s ease-out infinite;}
+    .tool .badge::after{animation-delay:1.1s; border-color:rgba(16,185,129,.18);}
+    @keyframes pulse{0%{opacity:0; transform:scale(.82)} 18%{opacity:.65} 100%{opacity:0; transform:scale(1.45)}}
+    .tool.reveal{opacity:0; transform:translateY(-18px);} 
+    .tool.reveal.in{opacity:1; transform:translateY(0); transition:opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1);}
+    .tool span{font-weight:800; color:#111; text-align:center}
+    .tool small{color:var(--muted); text-align:center; line-height:1.3}
+    .tool details{width:100%; margin-top:6px; border:1px solid var(--line); border-radius:12px; background:#fff; box-shadow:0 10px 18px rgba(15,23,42,.04); overflow:hidden;}
+    .tool summary{list-style:none; cursor:pointer; padding:10px 12px; font-weight:850; color:#0f172a; display:flex; justify-content:space-between; align-items:center; gap:10px;}
+    .tool summary::-webkit-details-marker{display:none}
+    .caret{width:10px; height:10px; border-right:2px solid #334155; border-bottom:2px solid #334155; transform:rotate(45deg); transition:transform .18s ease;}
+    details[open] .caret{transform:rotate(-135deg)}
+    .tool .detail-body{padding:10px 12px 12px; color:#334155; font-size:13px; line-height:1.55}
+    .tool .detail-body ul{margin:0; padding-left:18px}
+    .tool .detail-body li{margin:5px 0}
+    @media (max-width:980px){.tools{grid-template-columns:repeat(4, 1fr)}}
+    @media (max-width:640px){.tools{grid-template-columns:repeat(3, 1fr)}}
+
+    /* PROJECTS */
+    .cards{margin-top:40px; display:grid; grid-template-columns:repeat(4, 1fr); gap:22px;}
+    .card{background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); overflow:hidden; min-height:348px; display:flex; flex-direction:column; position:relative;}
+    .card .img{height:170px; background-size:cover; background-position:center; position:relative;}
+    .card .img::after{content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(2,6,23,.68), rgba(2,6,23,.18));}
+    .card .img .label{position:absolute; bottom:12px; left:12px; background:rgba(0,0,0,.28); color:#fff; padding:6px 10px; border-radius:999px; font-size:12px; border:1px solid rgba(255,255,255,.18); z-index:1;}
+    .card .img .big{position:absolute; top:14px; left:14px; z-index:1; font-weight:950; color:#fff; background:rgba(29,78,216,.22); border:1px solid rgba(255,255,255,.22); padding:10px 12px; border-radius:12px; box-shadow:0 12px 30px rgba(0,0,0,.18); backdrop-filter:blur(6px);}
+    .card .body{padding:18px 18px 14px; flex:1}
+    .card h4{margin:0 0 10px; font-size:20px}
+    .card p{margin:0; color:var(--muted); line-height:1.65; font-size:14px}
+    .tags{display:flex; gap:10px; flex-wrap:wrap; padding:0 18px 18px;}
+    .tag{background:#e5e7eb; color:#111827; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:700;}
+    @media (max-width:1100px){.cards{grid-template-columns:repeat(2, 1fr)}}
+    @media (max-width:680px){.cards{grid-template-columns:1fr}}
+
+    /* EXPERIENCE */
+    .exp-title{text-align:left; font-size:clamp(38px, 3.4vw, 66px); font-weight:950; margin:0 0 28px;}
+    .exp-list{display:flex; flex-direction:column; gap:18px}
+    .exp-accordion{border:1px solid var(--line); border-radius:16px; background:#fff; box-shadow:var(--shadow); overflow:hidden;}
+    .exp-accordion summary{list-style:none; cursor:pointer; padding:18px; display:flex; gap:16px; align-items:center;}
+    .exp-accordion summary::-webkit-details-marker{display:none}
+    .co-logo{width:74px; height:74px; border-radius:18px; border:1px solid var(--line); background:#f8fafc; display:grid; place-items:center; overflow:hidden; box-shadow:0 12px 26px rgba(15,23,42,.08); flex:0 0 auto;}
+    .co-logo img{width:56px; height:56px; object-fit:contain}
+    .co-head{flex:1}
+    .co-head h4{margin:0; font-size:22px}
+    .co-head .meta{margin:6px 0 0; color:var(--muted); font-weight:750}
+    .co-right{display:flex; align-items:center; gap:12px; color:var(--muted); font-weight:800}
+    .exp-accordion[open] summary{background:linear-gradient(90deg, rgba(29,78,216,.06), transparent)}
+    .exp-body{padding:0 18px 18px; display:grid; grid-template-columns:1.15fr .85fr; gap:18px;}
+    .bullets{margin:0; padding-left:18px; color:#1f2937; line-height:1.75}
+    .bullets li{margin:7px 0}
+    .stack-box{border:1px solid var(--line); border-radius:14px; padding:14px; background:#fbfcff;}
+    .stack-box b{display:block; margin-bottom:8px}
+    .mini-tags{display:flex; flex-wrap:wrap; gap:8px}
+    .mini{background:#eef2ff; border:1px solid #dbe3f4; color:#0f172a; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:800}
+    @media (max-width:920px){.exp-body{grid-template-columns:1fr;}}
+
+    /* CERTS */
+    .cert-grid{margin-top:40px; display:grid; grid-template-columns:repeat(4, 1fr); gap:18px;}
+    .cert{background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); padding:18px; position:relative; overflow:hidden;}
+    .cert::after{content:""; position:absolute; inset:-60px; background:radial-gradient(closest-side, rgba(29,78,216,.16), transparent 65%) 20% 20%/420px 420px no-repeat; pointer-events:none; opacity:.85;}
+    .cert-top{display:flex; align-items:center; gap:14px; position:relative; z-index:1}
+    .vendor{width:54px; height:54px; border-radius:16px; border:1px solid var(--line); background:#fff; display:grid; place-items:center; box-shadow:0 10px 20px rgba(15,23,42,.06); overflow:hidden;}
+    .vendor img{width:34px; height:34px; object-fit:contain}
+    .cert h4{margin:0; font-size:16px; position:relative; z-index:1}
+    .cert p{margin:10px 0 0; color:var(--muted); line-height:1.55; font-size:13px; position:relative; z-index:1}
+    .pill2{display:inline-flex; margin-top:12px; background:rgba(29,78,216,.10); border:1px solid rgba(29,78,216,.18); color:#0f172a; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:850; position:relative; z-index:1}
+    @media (max-width:1100px){.cert-grid{grid-template-columns:repeat(2, 1fr)}}
+    @media (max-width:680px){.cert-grid{grid-template-columns:1fr}}
+
+    /* CONTACT */
+    .contact{display:grid; grid-template-columns:1fr; gap:18px; width:min(980px, 100%); margin:34px auto 0;}
+    input, textarea{width:100%; padding:16px; border:1px solid #cfd6e4; border-radius:6px; font-size:16px; outline:none; background:#fff;}
+    textarea{min-height:140px; resize:vertical}
+    .send{width:100%; padding:14px 16px; background:var(--brand); color:#fff; border:none; border-radius:6px; font-size:16px; font-weight:900; cursor:pointer;}
+    .send:hover{background:var(--brand-2)}
+    .contact-icons{display:flex; justify-content:center; gap:18px; margin-top:18px;}
+    .contact-icons a{width:46px; height:46px; border-radius:10px; border:1px solid var(--line); background:#fff; display:grid; place-items:center; box-shadow:0 10px 20px rgba(15,23,42,.05); text-decoration:none;}
+    .contact-icons svg{width:22px; height:22px; fill:#111}
+
+    footer{background:#1f2937; color:#e5e7eb; text-align:center; padding:20px 14px; font-weight:750;}
+
+    .toggle-row{display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:18px;}
+    .toggle{border:1px solid var(--line); background:#fff; border-radius:999px; padding:8px 12px; font-weight:850; font-size:13px; cursor:pointer; box-shadow:0 10px 20px rgba(15,23,42,.05);}
+    .toggle.active{border-color:rgba(29,78,216,.35); background:rgba(29,78,216,.06)}
+  </style>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <div class="reveal">
+    <h1>Hello, I'm Avinash D</h1>
+    <h2>Senior Network Engineer</h2>
+    <p>
+      Senior Network Engineer with extensive hands-on experience supporting enterprise, data center, and hybrid cloud environments.
+      Strong background in Zero Trust, SD-WAN, NGFW platforms, identity-driven access control, and high-availability networking.
+    </p>
+
+    <div class="icon-row" aria-label="Quick links">
+      <a class="icon-btn" href="https://linkedin.com/in/avinashnetworks" target="_blank" rel="noreferrer" title="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.5 23.5h4V7.98h-4V23.5ZM8.5 7.98h3.84v2.12h.05c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.66 4.8 6.12v9.34h-4v-8.28c0-1.97-.04-4.5-2.74-4.5-2.74 0-3.16 2.14-3.16 4.36v8.42h-4V7.98Z"/></svg>
+      </a>
+      
+      <a class="icon-btn" href="mailto:davinashraj12@gmail.com" title="Email">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg>
+      </a>
+      <a class="icon-btn" href="#contact" title="Resume">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-8-6Zm1 7V3.5L19.5 9H15ZM8 13h8v2H8v-2Zm0 4h8v2H8v-2Zm0-8h5v2H8V9Z"/></svg>
+      </a>
+    </div>
+
+    <nav class="hero-nav" aria-label="Section navigation">
+      <a class="pill" href="#about">About</a>
+      <a class="pill" href="#experience">Work Experience</a>
+      <a class="pill" href="#certs">Certifications</a>
+      <a class="pill" href="#contact">Contact Me</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section" id="about">
+  <div class="wrap">
+    <h3 class="title reveal">About Me</h3>
+    <p class="subtitle reveal">
+      I support enterprise, data center, and hybrid cloud environments across energy, healthcare, financial, and telecom domains.
+      My focus is building secure and reliable networks using Zero Trust, SD-WAN, NGFWs, and identity-driven access control,
+      and automating operations using Terraform, Ansible, and Python.
+    </p>
+
+    <div class="about-grid">
+      <div class="about-card reveal">
+        <div class="about-head">
+          <div class="avatar">AD</div>
+          <div>
+            <h4>What I do</h4>
+            <p>
+              I design and operate secure, high-availability networks from branch WAN and SD-WAN to data center fabrics and hybrid cloud connectivity.
+              I like turning messy, manual ops into clean, repeatable automation.
+            </p>
+          </div>
+        </div>
+
+        <div class="highlights">
+          <span class="chip"><strong>Zero Trust</strong> (ZIA/ZPA)</span>
+          <span class="chip"><strong>NGFW</strong> (Palo Alto / Fortinet)</span>
+          <span class="chip"><strong>Data Center</strong> (Cisco ACI)</span>
+          <span class="chip"><strong>Routing</strong> (BGP / OSPF)</span>
+          <span class="chip"><strong>Automation</strong> (Terraform / Ansible / Python)</span>
+          <span class="chip"><strong>Cloud</strong> (AWS / Azure / GCP)</span>
+        </div>
+      </div>
+
+      <div class="about-stats reveal">
+        <h4 style="margin:0">Quick Snapshot</h4>
+        <div class="stat-grid">
+          <div class="stat"><b>Core Focus</b><span>Enterprise Networking & Security</span></div>
+          <div class="stat"><b>Top Tools</b><span>Palo Alto · Zscaler · Cisco · Fortinet</span></div>
+          <div class="stat"><b>Key Work</b><span>Zero Trust · SD-WAN · DC Networks</span></div>
+          <div class="stat"><b>Automation</b><span>Terraform · Ansible · Python</span></div>
+        </div>
+        <p class="note" style="text-align:left;margin-top:14px">
+          Email: <strong>davinashraj12@gmail.com</strong><br>
+          Phone: <strong>(737) 271-5397</strong><br>
+          LinkedIn: <strong>linkedin.com/in/avinashnetworks</strong>
+        </p>
+      </div>
+    </div>
+  
+
+    <div class="wrap" style="margin-top:60px">
+      <h3 class="title reveal" style="font-size:42px">Technologies & Tools</h3>
+      <p class="subtitle reveal">Hands-on platforms and tools I use to design, secure, and automate enterprise networks.</p>
+
+      <div class="tools">
+        <div class="tool reveal">
+          <div class="badge">AWS</div><span>AWS</span><small>VPC, TGW, Direct Connect</small>
+          <details><summary>Details <span class="caret"></span></summary>
+            <div class="detail-body"><ul><li>Hybrid connectivity using Transit Gateway</li><li>Traffic visibility via Flow Logs</li></ul></div>
+          </details>
+        </div>
+        <div class="tool reveal">
+          <div class="badge">AZ</div><span>Azure</span><small>VNet, ExpressRoute</small>
+          <details><summary>Details <span class="caret"></span></summary>
+            <div class="detail-body"><ul><li>Hub-spoke network design</li><li>Security controls with Azure Firewall</li></ul></div>
+          </details>
+        </div>
+        <div class="tool reveal">
+          <div class="badge">ZPA</div><span>Zscaler</span><small>ZIA / ZPA</small>
+          <details><summary>Details <span class="caret"></span></summary>
+            <div class="detail-body"><ul><li>Application-based Zero Trust access</li><li>Policy tuning and optimization</li></ul></div>
+          </details>
+        </div>
+        <div class="tool reveal">
+          <div class="badge">PA</div><span>Palo Alto</span><small>Panorama, GP</small>
+          <details><summary>Details <span class="caret"></span></summary>
+            <div class="detail-body"><ul><li>HA firewall deployments</li><li>GlobalProtect VPN with MFA</li></ul></div>
+          </details>
+        </div>
+        <div class="tool reveal">
+          <div class="badge">ACI</div><span>Cisco ACI</span><small>EPG, Contracts</small>
+          <details><summary>Details <span class="caret"></span></summary>
+            <div class="detail-body"><ul><li>Data center segmentation</li><li>Brownfield migrations</li></ul></div>
+          </details>
+        </div>
+        <div class="tool reveal">
+          <div class="badge">TF</div><span>Terraform</span><small>IaC</small>
+          <details><summary>Details <span class="caret"></span></summary>
+            <div class="detail-body"><ul><li>Reusable modules</li><li>Reduced configuration drift</li></ul></div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<section class="section alt" id="experience" style="padding-top:40px">
+  <div class="wrap">
+    <h3 class="exp-title reveal">Work Experience</h3>
+
+    <div class="exp-list">
+      <details class="exp-accordion reveal" open>
+        <summary>
+          <div class="co-logo"><img alt="Avangrid" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' rx='24' fill='%230b1220'/%3E%3Ctext x='60' y='70' text-anchor='middle' font-family='Arial' font-size='34' font-weight='900' fill='%232563eb'%3EAV%3C/text%3E%3C/svg%3E"></div>
+          <div class="co-head"><h4>Avangrid Renewables</h4><div class="meta">Senior Network Engineer · Aug 2024 - Present</div></div>
+          <div class="co-right">View <span class="caret"></span></div>
+        </summary>
+        <div class="exp-body">
+          <div><ul class="bullets">
+            <li>Automated AWS deployments using Terraform and integrated Ansible/Packer for repeatable builds.</li>
+            <li>Deployed SD-WAN (Cisco Viptela, Versa, Silver Peak) using centralized templates and policy routing.</li>
+            <li>Implemented Palo Alto and Fortinet HA; validated failover and maintenance workflows.</li>
+            <li>Delivered data center networking using Cisco ACI and executed brownfield migrations.</li>
+          </ul></div>
+          <div class="stack-box"><b>Key Tech</b><div class="mini-tags">
+            <span class="mini">Terraform</span><span class="mini">Ansible</span><span class="mini">AWS</span><span class="mini">GCP</span>
+            <span class="mini">Viptela</span><span class="mini">Palo Alto</span><span class="mini">Fortinet</span><span class="mini">Cisco ACI</span>
+          </div></div>
+        </div>
+      </details>
+
+      <details class="exp-accordion reveal">
+        <summary>
+          <div class="co-logo"><img alt="Optum" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' rx='24' fill='%23ffffff'/%3E%3Ccircle cx='60' cy='60' r='40' fill='%23f97316'/%3E%3Ctext x='60' y='70' text-anchor='middle' font-family='Arial' font-size='26' font-weight='900' fill='%230b1220'%3EOP%3C/text%3E%3C/svg%3E"></div>
+          <div class="co-head"><h4>Optum</h4><div class="meta">Senior Network Security Engineer · Jan 2024 - Jun 2024</div></div>
+          <div class="co-right">View <span class="caret"></span></div>
+        </summary>
+        <div class="exp-body">
+          <div><ul class="bullets">
+            <li>Built Azure network security constructs and implemented GCP firewall policies for least privilege governance.</li>
+            <li>Managed NGFW policy standards (Check Point, Palo Alto) and VPN services across production environments.</li>
+            <li>Improved operational visibility via monitoring and dashboards.</li>
+          </ul></div>
+          <div class="stack-box"><b>Key Tech</b><div class="mini-tags">
+            <span class="mini">Azure Firewall</span><span class="mini">GCP</span><span class="mini">Check Point</span><span class="mini">Palo Alto</span>
+          </div></div>
+        </div>
+      </details>
+
+      <details class="exp-accordion reveal">
+        <summary>
+          <div class="co-logo"><img alt="US Bank" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' rx='24' fill='%231d4ed8'/%3E%3Ctext x='60' y='70' text-anchor='middle' font-family='Arial' font-size='26' font-weight='900' fill='white'%3EUSB%3C/text%3E%3C/svg%3E"></div>
+          <div class="co-head"><h4>US Bank</h4><div class="meta">Network Engineer · Feb 2023 - Dec 2023</div></div>
+          <div class="co-right">View <span class="caret"></span></div>
+        </summary>
+        <div class="exp-body">
+          <div><ul class="bullets">
+            <li>Deployed Palo Alto VM Series in AWS/Azure and integrated SD-WAN connectivity for cloud application access.</li>
+            <li>Implemented identity driven NAC using Cisco ISE and Aruba ClearPass.</li>
+            <li>Centralized operations using Panorama and improved SIEM visibility via Splunk integrations.</li>
+          </ul></div>
+          <div class="stack-box"><b>Key Tech</b><div class="mini-tags">
+            <span class="mini">VM Series</span><span class="mini">AWS</span><span class="mini">Azure</span><span class="mini">Panorama</span>
+            <span class="mini">Cisco ISE</span><span class="mini">ClearPass</span><span class="mini">Splunk</span>
+          </div></div>
+        </div>
+      </details>
+
+      <details class="exp-accordion reveal">
+        <summary>
+          <div class="co-logo"><img alt="Amdocs" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' rx='24' fill='%230b1220'/%3E%3Ctext x='60' y='70' text-anchor='middle' font-family='Arial' font-size='28' font-weight='900' fill='%2310b981'%3EAM%3C/text%3E%3C/svg%3E"></div>
+          <div class="co-head"><h4>Amdocs</h4><div class="meta">Network Engineer · May 2019 - Jul 2022</div></div>
+          <div class="co-right">View <span class="caret"></span></div>
+        </summary>
+        <div class="exp-body">
+          <div><ul class="bullets">
+            <li>Configured and managed Zscaler ZIA with advanced threat protection and URL filtering to reduce exposure.</li>
+            <li>Implemented SSL decryption on Palo Alto and automated operations using Ansible to reduce drift.</li>
+            <li>Supported high availability and secure access patterns across multi vendor environments.</li>
+          </ul></div>
+          <div class="stack-box"><b>Key Tech</b><div class="mini-tags">
+            <span class="mini">Zscaler ZIA</span><span class="mini">Palo Alto</span><span class="mini">Ansible</span>
+          </div></div>
+        </div>
+      </details>
+    </div>
+
+    <p class="note">Want real company logos? Upload the PNG/SVG files and I will replace the placeholders.</p>
+  </div>
+</section>
+
+<section class="section" id="certs">
+  <div class="wrap">
+    <h3 class="title reveal">Certifications</h3>
+    
+
+    <div class="cert-grid">
+      <div class="cert reveal">
+        <div class="cert-top"><div class="vendor"><img alt="Cisco" src="https://cdn.simpleicons.org/cisco/1d4ed8"></div><h4>Cisco Certified Network Professional (CCNP)</h4></div>
+        <p>Advanced routing, switching, and enterprise network design for large scale environments.</p>
+        <div class="pill2">Cisco</div>
+      </div>
+      <div class="cert reveal">
+        <div class="cert-top"><div class="vendor"><img alt="Cisco" src="https://cdn.simpleicons.org/cisco/1d4ed8"></div><h4>Cisco Certified Network Associate (CCNA)</h4></div>
+        <p>Strong foundation in networking fundamentals and troubleshooting.</p>
+        <div class="pill2">Cisco</div>
+      </div>
+      <div class="cert reveal">
+        <div class="cert-top"><div class="vendor"><img alt="Palo Alto Networks" src="https://cdn.simpleicons.org/paloaltonetworks/1d4ed8"></div><h4>Palo Alto Networks Certified Network Security Engineer (PCNSE)</h4></div>
+        <p>Hands on proficiency with PAN OS operations, policy design, and NGFW best practices.</p>
+        <div class="pill2">Palo Alto</div>
+      </div>
+      <div class="cert reveal">
+        <div class="cert-top"><div class="vendor"><img alt="AWS" src="https://cdn.simpleicons.org/amazonaws/1d4ed8"></div><h4>AWS Networking Specialty</h4></div>
+        <p>Cloud networking expertise: hybrid connectivity, routing, segmentation, and security controls.</p>
+        <div class="pill2">AWS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="contact">
+  <div class="wrap">
+    <h3 class="title reveal">Contact Me</h3>
+
+    <div class="contact reveal" style="text-align:center">
+      <p style="font-size:18px; font-weight:800">Let’s Connect</p>
+      <p style="font-size:16px; margin-top:10px">📧 <strong>davinashraj12@gmail.com</strong></p>
+      <p style="font-size:16px">📞 <strong>(737) 271-5397</strong></p>
+    </div>
+
+    <div class="contact-icons reveal">
+      <a href="https://linkedin.com/in/avinashnetworks" target="_blank" rel="noreferrer" title="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.5 23.5h4V7.98h-4V23.5ZM8.5 7.98h3.84v2.12h.05c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.66 4.8 6.12v9.34h-4v-8.28c0-1.97-.04-4.5-2.74-4.5-2.74 0-3.16 2.14-3.16 4.36v8.42h-4V7.98Z"/></svg>
+      </a>
+      
+      <a href="mailto:davinashraj12@gmail.com" title="Email">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg>
+      </a>
+    </div>
+
+    
+  </div>
+</section>
+
+<footer>
+  © <span id="yr"></span> Avinash D. All Rights Reserved.
+</footer>
+
+<script>
+  // year only (keep preview stable)
+  document.getElementById('yr').textContent = String(new Date().getFullYear());
+
+  // simple reveal
+  (function(){
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+          obs.unobserve(e.target);
+        }
+      });
+    }, {threshold: 0.12});
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  })();
+</script>
+
+</body>
+</html>
